@@ -1,0 +1,56 @@
+第一种：用 top 命令 中的cpu 信息观察
+
+　　Top可以看到的cpu信息有：
+
+　　Tasks: 29 total, 1 running, 28 sleeping, 0 stopped, 0 zombie
+
+　　Cpu(s): 0.3% us, 1.0% sy, 0.0% ni, 98.7% id, 0.0% wa, 0.0% hi, 0.0% si
+
+　　具体的解释如下：
+
+　　Tasks: 29 total 进程总数
+
+　　1 running 正在运行的进程数
+
+　　28 sleeping 睡眠的进程数
+
+　　0 stopped 停止的进程数
+
+　　0 zombie 僵尸进程数
+
+　　Cpu(s):
+
+　　0.3% us 用户空间占用CPU百分比
+
+　　1.0% sy 内核空间占用CPU百分比
+
+　　0.0% ni 用户进程空间内改变过优先级的进程占用CPU百分比
+
+　　98.7% id 空闲CPU百分比
+
+　　0.0% wa 等待输入输出的CPU时间百分比
+
+　　0.0% hi
+
+　　0.0% si
+
+　　0.0% wa 的百分比可以大致的体现出当前的磁盘io请求是否频繁。如果 wa的数量比较大，说明等待输入输出的的io比较多。
+  
+ iostat:
+   iostat -d -k 1 10 
+参数 -d 表示，显示设备（磁盘）使用状态；-k某些使用block为单位的列强制使用Kilobytes为单位；1 10表示，数据显示每隔1秒刷新一次，共显示10次。
+tps：该设备每秒的传输次数（Indicate the number of transfers per second that were issued to the device.）。“一次传输”意思是“一次I/O请求”。多个逻辑请求可能会被合并为“一次I/O请求”。“一次传输”请求的大小是未知的。
+
+kB_read/s：每秒从设备（drive expressed）读取的数据量；kB_wrtn/s：每秒向设备（drive expressed）写入的数据量；kB_read：读取的总数据量；kB_wrtn：写入的总数量数据量；这些单位都为Kilobytes。
+
+   iostat -d -x -k 1 10 使用-x参数我们可以获得更多统计信息。
+rrqm/s：每秒这个设备相关的读取请求有多少被Merge了（当系统调用需要读取数据的时候，VFS将请求发到各个FS，如果FS发现不同的读取请求读取的是相同Block的数据，FS会将这个请求合并Merge）；wrqm/s：每秒这个设备相关的写入请求有多少被Merge了。
+
+rsec/s：每秒读取的扇区数；wsec/：每秒写入的扇区数。r/s：The number of read requests that were issued to the device per second；w/s：The number of write requests that were issued to the device per second；
+
+await：每一个IO请求的处理的平均时间（单位是微秒毫秒）。这里可以理解为IO的响应时间，一般地系统IO响应时间应该低于5ms，如果大于10ms就比较大了。
+
+%util：在统计时间内所有处理IO时间，除以总共统计时间。例如，如果统计间隔1秒，该设备有0.8秒在处理IO，而0.2秒闲置，那么该设备的%util = 0.8/1 = 80%，所以该参数暗示了设备的繁忙程度。一般地，如果该参数是100%表示设备已经接近满负荷运行了（当然如果是多磁盘，即使%util是100%，因为磁盘的并发能力，所以磁盘使用未必就到了瓶颈）。
+
+   iostat -c 1 10 ostat还可以用来获取cpu部分状态值
+

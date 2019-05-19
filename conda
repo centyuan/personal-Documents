@@ -1,0 +1,13 @@
+conda --version
+conda update conda
+source activate envir_name
+conda info -e #列出所有环境
+conda create -n flowers --clone snowflakes#复制环境
+conda remove -n flowers #删除环境
+conda create -n snakes python=3#创建环境
+source deactivate
+conda list
+conda install 
+conda remove -n name
+
+
