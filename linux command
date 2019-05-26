@@ -17,4 +17,8 @@ scp remote_username@remote_ip:remote_folder local_folder #远程到本地
 which       查看可执行文件的位置 
 whereis    查看文件的位置 
 locate       配 合数据库查看文件位置 
-find          实际搜寻硬盘查询文件名称 
+find          实际搜寻硬盘查询文件名称
+
+
+
+

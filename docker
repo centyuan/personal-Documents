@@ -7,42 +7,32 @@
 
 2运行交互式的容器：docker run -r -t ubuntu:15.10 /bin/bash
 #-t:在新容器内指定一个伪终端或终端。
-
 #-i:允许你对容器内的标准输入 (STDIN) 进行交互。
 
 3启动容器（后台模式）
-
 docker run -d ubuntu:15.10 /bin/sh -c "while true; do echo hello world; sleep 1; done"
 
 4需要确认容器有在运行，可以通过 docker ps 来查看
-
 docker ps
 
 5在容器内使用docker logs命令，查看容器内的标准输出
-
  docker logs 2b1b7a428627
+
 6进入容器
 docker exec -ti 容器ID /bin/bash
 　　###通过docker创建守护运行（在使用-d参数时）的容器时，容器启动后会进入后台。用户无法看到容器中的信息。某些时候如果需要进入容器进行操作，有多种方法，包括使用docker attach命令、docker exec命令，以及nsenter工具等。
-
 attach命令
 docker attach 容器名称/ID
 　　在使用attach命令有时候并不方便。当多个窗口同时attach到同一个容器的时候，所有窗口都会同步显示。当某个窗口因命令阻塞时，其他窗口也无法执行操作了。
-
 exec命令
 docker exec -ti 容器ID /bin/bash
 nsenter工具
 7将容器打包为镜像
 docker commit -m  ""   -a  ""   容器ID（可以简写）  镜像名称
-
 -m  提示信息    -a  作者         
-
 
 获取一个新的镜像： docker pull ubuntu:13.10
 查找镜像：docker search httpd
-
-
-
 搜索镜像：docker search centos 
 获取镜像：docker pull registry.cn-hangzhou.aliyuncs.com/1hpc/centos 
 查看镜像id：docker images -q 
@@ -51,7 +41,7 @@ docker commit -m  ""   -a  ""   容器ID（可以简写）  镜像名称
 创建容器：docker run --name <container_name> centos:7,container_name是自己定义的容器名 
 查看所有容器：docker ps -a 
 查看运行容器：docker ps 
-查看容器id：docker ps -q 
+查看容器id：d	ocker ps -q 
 进入容器：docker exec -it <container_id> bash 
 退出容器：exit 
 删除容器：docker rm <container_id> 
@@ -66,3 +56,14 @@ docker commit -m  ""   -a  ""   容器ID（可以简写）  镜像名称
 mysql容器启动后，其他容器就可以来连接使用了，方法如下： 
 容器连接：docker run --name some-app --link some-mysql:mysql -d application-that-uses-mysql 
 
+docker镜像导出导入：
+ docker save -o imagename.tar  nginx:latest
+ docker save > imagename.tar nginx:latest
+  -o和>表示输出到文件 nginx:latest是源镜像名
+ docker export -o name.tar nginx-test
+ nginx-test是源容器名
+
+ docker load  -i imagename.tar
+ docker load <  imagename.tar
+ -i和<表示从文件输入
+ docker import nginx-test.tar nginx:imp 
