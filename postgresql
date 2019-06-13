@@ -1,3 +1,14 @@
+登录:
+ psql -U dbuser -d exampledb -h 127.0.0.1 -p 5432
+
+配置数据库允许远程连接访问:
+1修改监听地址
+sudo gedit /etc/postgresql/10/main/postgresql.conf
+ #将listen_addresses='localhost'改为listen_addresses='*'
+2修改可访问用户的IP段
+sudo gedit /etc/postgresql/10/main/pg_hba.conf
+ #在文件末尾添加 host all all 0.0.0.0 0.0.0.0 md5 #表示允许任何IP连接
+
 备份：
  pg_dump  –h 127.0.0.1  -p  5432  -U  postgres -c  –f  dbname.sql  dbname
  pg_dump -h 164.82.233.54 -U postgres databasename > C:\databasename.bak  

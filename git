@@ -16,8 +16,9 @@
  
 
 2：登录github。打开setting->SSH keys，点击右上角 New SSH key，把生成好的公钥id_rsa.pub放进 key输入框中，再为当前的key起一个title来区分每个key。
-3：测试：ssh git@github.com  连接成功！
-
+3：测试：
+ssh git@github.com  连接成功！
+ssh -T git@gitee.com
 生成gitlab的sshkey，并且重命名为id_rsa_gitlab
 
 $ ssh-keygen -t rsa -C "your_email@email.com" -f ~/.ssh/id_rsa_gitlab

@@ -67,3 +67,14 @@ docker镜像导出导入：
  docker load <  imagename.tar
  -i和<表示从文件输入
  docker import nginx-test.tar nginx:imp 
+
+docker 宿主机与容器文件相互拷贝
+1宿主机拷贝到容器：
+  sudo docker cp /home/centyuan/file(文件) or /home/centyuan/dir(目录) 容器name or ID:/root/
+2容器拷贝到宿主机：
+ sudo docker cp mycontainer:/root/fiel.txt /home/centyuan/
+需要注意的是不管容器有没有启动，拷贝命令都会生效
+
+
+
+ 

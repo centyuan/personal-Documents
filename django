@@ -1,0 +1,10 @@
+request.POST.get('name','')
+request.POST['name']
+如果使用request.POST['sth']，那么假如‘sth’没有在post内容中就会报错keyError；而使用request.POST.get('sth')时，会返回一个None而不是报错。所以，使用request.POST.get()就相当于：
+try:
+    x=request.POST['name']
+except KeyError:
+    x=None
+request.POST.get()还能添加一个额外的默认参数，如：
+    request.POST.get('name','defaultValue')
+如果'name'没在POST[]中,就会return这个defaultValue的值

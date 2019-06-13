@@ -9,6 +9,8 @@ sudo -i: 为了频繁的执行某些只有超级用户才能执行的权限，�
 | 表示管道，上一条命令的输出，作为下一条命令参数，如 echo 'yes' | wc -l
 
 || 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo "fail"
+可以
+nohup python run.py &不挂断后台运行
 
 scp:
 scp -r local_folder remote_username@remote_ip:remote_folder #本地到远程
@@ -19,6 +21,13 @@ whereis    查看文件的位置
 locate       配 合数据库查看文件位置 
 find          实际搜寻硬盘查询文件名称
 
+lsb_release -a
+cat /etc/issue
+cat /etc/xxx-release 
+cat /pro/version
+
+curl -d "subject=邮件报警测试&message=这是一个邮件测试2&to_email=cent_yuan@163.com"   http://127.0.0.1:8000/api/sendmail/
+nohup python manage.py runserver 0.0.0.0:8001 &
 
 
 
