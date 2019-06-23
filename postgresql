@@ -43,6 +43,8 @@ sudo gedit /etc/postgresql/10/main/pg_hba.conf
 \du:列出所有用户
 \h:查看SQl命令的解释，比如 \h select
 \?:查看psql命令列表
+\c [database_name]:切换数据库
+\c - [user_name]:切换用户
 
 修改管理员密码
 alter user postgres with password '123456';

@@ -10,17 +10,16 @@ sudo -i: 为了频繁的执行某些只有超级用户才能执行的权限，�
 
 || 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo "fail"
 可以
+
+不挂断后台运行
 nohup python run.py &不挂断后台运行
 
+远程复制
 scp:
 scp -r local_folder remote_username@remote_ip:remote_folder #本地到远程
 scp remote_username@remote_ip:remote_folder local_folder #远程到本地 
 
-which       查看可执行文件的位置 
-whereis    查看文件的位置 
-locate       配 合数据库查看文件位置 
-find          实际搜寻硬盘查询文件名称
-
+查看发现版本信息
 lsb_release -a
 cat /etc/issue
 cat /etc/xxx-release 
@@ -28,6 +27,72 @@ cat /pro/version
 
 curl -d "subject=邮件报警测试&message=这是一个邮件测试2&to_email=cent_yuan@163.com"   http://127.0.0.1:8000/api/sendmail/
 nohup python manage.py runserver 0.0.0.0:8001 &
+
+查看文件命令(cat tac nl more less head tail)
+cat -n passwd 参数显示行号
+head 只查看文件头几行,默认10行
+tail 相反显示文件的最后10行
+tail -f 这个参数可以不停的读取某个文件内容并显示,可以让我们动态查看日志.
+
+搜索文件命令(whereis which find locate)
+     
+whereis    查看可执行文件的位置(搜索很快,从数据库中差,不从硬盘中查,只能搜索二进制文件-b man帮助文件-m,和源代码文件 -s) 
+locate     配合数据库查看文件位置(快而全,通过/var/lib/mlocate/mlocate.db数据库查找,每天自动更新一次)
+它可以用来查找指定目录下的不同文件类型，如查找 /etc 下所有以 sh 开头的文件：
+locate /etc/sh
+which      通常用来确定是否安装指定的软件,因为只从PATH环境变量制定的路径中取搜索命令
+find          实际搜寻硬盘查询文件名称(最强大的,可以通过文件的时间戳,文件的权限)
+usage: find [path] 
+
+显示目录或文件的大小
+du 
+usage: du -h /home/centyuan
+df -h
+
+压缩打包
+zip -r -q -o centyuan.zip /home/centyuan
+-r:表示递归打包包含子目录的全部内容
+-q:表示为安全模式,即不向屏幕输出信息
+-o:表示输出文件,需在其后紧跟打包输出文件名
+打包
+tar -cf centyuan.tar /home/centyuan/Desktop
+-c:表示创建一个tar包文件
+-f:用于制定文件名
+-v:可视的输出打包文件
+打包压缩
+tar -czf ccentyuan.tar.gz /home/centyuan/Desktop
+解包
+tar -xf centyuan.tar -C tardir
+-x:解包一个文件到指定路径(-C)
+解包解压
+tar -xzf centyuan.tar.gz
+unzip something.zip
+
+cut /etc/passwd -d ':' -f 1,6
+#$ 打印/etc/passwd文件中以:为分隔符的第1个字段和第6个字段分别表示用户名和其家目
+#cut 打印每一行的某个字段
+wc /etc/passwd
+#用于统计并输出一个文件中行,单词,字节的数目.简单小巧的计数工具
+sort
+uniq
+grep 
+
+sed 
+Linux sed 命令是利用脚本来处理文本文件,sed 可依照脚本的指令来处理、编辑文本文件。
+
+主要用来自动编辑一个或多个文件、简化对文件的反复操作、编写转换程序等。
+sed -i 's/beitihuan/tihuan/ file #替换
+
+
+
+awk
+
+
+
+
+
+
+
 
 
 
