@@ -86,9 +86,9 @@ sed -i 's/beitihuan/tihuan/ file #替换
 
 
 awk
-
-
-
+awk所有的操作都是基于pattern(模式)—action(动作)对来完成的，如下面的形式：
+pattern {action}
+它将所有的动作操作用一对{}花括号包围起来。其中pattern通常是表示用于匹配输入的文本的“关系式”或“正则表达式”，action则是表示匹配后将执行的动作。在一个完整awk操作中，这两者可以只有其中一个，如果没有pattern则默认匹配输入的全部文本，如果没有action则默认为打印匹配内容到屏幕。
 
 
 

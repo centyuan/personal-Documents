@@ -22,7 +22,14 @@ ssh -T git@gitee.com
 生成gitlab的sshkey，并且重命名为id_rsa_gitlab
 
 $ ssh-keygen -t rsa -C "your_email@email.com" -f ~/.ssh/id_rsa_gitlab
-
+ ssh -i /home/centyuan/.ssh/id_rsa_UbuntuServer root@120.79.12.2#秘钥登录
 git add .   后面加一个“.”，匹配所有的文件
 git commit -m 'message'
+
+
+git pull #拉取远端repo并合并,git pull 命令等同于执行两个操作: 先使用 git fetch 从远程分支抓取最新的分支修改信息，然后使用 git merge 把修改合并进当前的分支。
+执行git pull 后会从克隆的位置拉取代码并更新本地仓库，就是把远端的修改同步到本地
+(clone不需要指定远程仓库,就是clone的)
+
+
 

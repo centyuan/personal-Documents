@@ -23,8 +23,10 @@ sudo apt-get -f install
 9) make clean   删除安装时产生的临时文件
 最好是看这个软件的install和readme文件，一般会说明该软件的可执行文件存放在哪里，一般是放在/usr/local/bin目录下。
 如果软件里面没有config这个文件，那么你下载的是二进制文件，可以直接使用。
+
 4:apt
- apt-cache search soft 注：soft是你要找的软件的名称或相关信息
+ apt-get -d install packagename 仅下载不安装
+ apt-cache search soft 注：soft是你要找的软件的名称或相关信息(针对本地数据进行相关操作的工具)
  apt-get install soft.version安装
 2) apt-cache search soft 注：soft是你要找的软件的名称或相关信息
 3) 如果2中找到了软件soft.version，则可用apt-get install soft.version安装
@@ -32,6 +34,8 @@ sudo apt-get -f install
 apt-get是debian，ubuntu发行版本的包管理工具，与红帽中的yum工具非常相似,它一般需要root权限执行，所以一般要跟着sudo命令。
 apt-get install packagename 安装一个新软件包
 apt-get remove packagename  卸载一个已安装的软件包（保留配置文件）
+apt-get autoremove packagename 移除之前被其他软件包依赖,但现在不再被使用的软件包
+apt-get purge packagename 不保留配置文件的移除
 apt-get --purge remove packagename  卸载一个已安装的软件包（删除配置文件）
 dpkg --force-all --purge packagename   有些软件比较难卸载，而且还阻止了别的软件的应用，就可以用这个
 apt-get autoremove  因为apt会把已装或已卸的软件都备份在硬盘上，所以如果需要空间的话，可以这个命令来删除你已经删除的软件。
@@ -69,6 +73,17 @@ dpkg -l softwarename 查看软件版本
            make
            make install            ##安装
            make clean              ##安装完成后用来清理临时文件
+dpkg常用参数介绍：
+参数	说明
+-i	安装指定deb包
+-R	后面加上目录名，用于安装该目录下的所有deb安装包
+-r	remove，移除某个已安装的软件包
+-I	显示deb包文件的信息
+-s	显示已安装软件的信息
+-S	搜索已安装的软件包
+-L	显示已安装软件包的目录信息
+
+
 
 rpm包：
 1、rpm包
@@ -87,6 +102,17 @@ yum卸载：
 
        # yum -y remove 包名
 
+
+　　PPA 的一般形式是： ppa:user/ppa-name
+
+添加 PPA 源 
+　　添加 PPA 源的命令为：sudo add-apt-repository ppa:user/ppa-name 
+　　添加好记得要更新一下： sudo apt-get update
+
+删除 PPA 源 
+　　删除 PPA 源的命令格式则为：sudo add-apt-repository -r ppa:user/ppa-name 
+　　然后进入 /etc/apt/sources.list.d 目录，将相应 ppa 源的保存文件删除。 
+　　最后同样更新一下：sudo apt-get update
 
 
 

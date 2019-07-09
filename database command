@@ -6,4 +6,4 @@ mysql -u root -p
 postgresql数据库
 sudo -u postgres psql  
 sudo su postgres
-测是
+
