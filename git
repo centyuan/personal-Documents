@@ -31,5 +31,20 @@ git pull #拉取远端repo并合并,git pull 命令等同于执行两个操作: 
 执行git pull 后会从克隆的位置拉取代码并更新本地仓库，就是把远端的修改同步到本地
 (clone不需要指定远程仓库,就是clone的)
 
+1:git checkout -b dev origin/dev #创建一个本地dev空分支追踪origin的dev
+2:git pull origin dev
+
+
+ssh登录远程服务器:
+1.命令如下
+ssh -i key.pem 
+ssh -i key.pem root@IP
+如果出现报错说明这个问题是文件的权限太大了，需要给小点 
+sudo chmod 600 key.pem 
+然后再执行ssh -i key.pem root@IP
+2.可以使用ssh-add 添加key文件
+ssh-add -k key.pem  
+3.正常登录堡垒机
+ssh root@IP
 
 

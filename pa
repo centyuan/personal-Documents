@@ -1,1 +1,15 @@
 centyuan.top user/pa:admin/admin123
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'tutorial',
+        'USER':'postgres',
+        'PASSWORD':'123456',
+        'HOST':'127.0.0.1',
+        'POST':'5432'
+    }
+}
+
+
