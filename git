@@ -56,10 +56,24 @@ git branch -d experimental
 #撤销一个合并
 git reset --hard HEAD^ 
 
+版本回退:
+git reset --hard HEAD^ #可以使工作目录回到上次提交的状态,HEAD表示当前版本
+git reset --hard HEAD^^ #上上一个版本,往上100个写成 HEAD~100
+
+#可以用回到,回退前的新版本
+git reset --hard commit_id
+git reflog  #用来记录你的每一次命令：便于查看commit_id
+
 一:修复未提交文件中的错误（重置）
-git reset --hard HEAD^ #可以使工作目录回到上次提交的状态
+git reset --hard HEAD^ #可以使工作目录回到上次提交的状态,HEAD表示当前版本
+git reset --hard HEAD^^ #上上一个版本
 #恢复一个文件
-git checkout -- hello.rb #这条命令把 hello.rb 从 HEAD 中 checkout 并且把它恢复成未修改时的样子。
+git checkout -- readme.txt#把readme.txt从HEAD中checkout 并且把它恢复成未修改时的样子,可以丢弃工作区的修改
+git reset HEAD readme.txt (git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本。)
+ 两种情况:
+	一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+
+	一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
 
 二: 修复已提交文件中的错误
 1:创建一个 新的提交（commit），在新的提交里撤消老的提交所作的修改。这种作法在你已经把代码发布的情况下十分正确.
@@ -67,8 +81,6 @@ git revert HEAD  (HEAD为commit的名字,git log 可以查看)
 git revert HEAD^ (撤销上上次的提交 next-to-last)
 
 2:去修改你的 老提交（old commit）
-
-
 
 1:git checkout -b dev origin/dev #创建一个本地dev空分支追踪origin的dev(取远程分支并分化一个新分支)
 #本地新建一个分支dev，并切换到新建的分支dev，并且建立dev与远程分支origin/dev的跟踪关系。
