@@ -59,10 +59,10 @@ git reset --hard HEAD^
 版本回退:
 git reset --hard HEAD^ #可以使工作目录回到上次提交的状态,HEAD表示当前版本
 git reset --hard HEAD^^ #上上一个版本,往上100个写成 HEAD~100
-
 #可以用回到,回退前的新版本
 git reset --hard commit_id
 git reflog  #用来记录你的每一次命令：便于查看commit_id
+
 
 一:修复未提交文件中的错误（重置）
 git reset --hard HEAD^ #可以使工作目录回到上次提交的状态,HEAD表示当前版本
@@ -82,13 +82,14 @@ git revert HEAD^ (撤销上上次的提交 next-to-last)
 
 2:去修改你的 老提交（old commit）
 
-1:git checkout -b dev origin/dev #创建一个本地dev空分支追踪origin的dev(取远程分支并分化一个新分支)
+1:git checkout -b dev origin/dev #创建并切换本地dev分支后追踪origin的dev(取远程分支并分化一个新分支)
 #本地新建一个分支dev，并切换到新建的分支dev，并且建立dev与远程分支origin/dev的跟踪关系。
 2:git pull origin dev #拉取origin的dev分支到本地分支
 查看本地分支的跟踪分支（上游分支）
 命令：git branch -vv。
 
 
+git push --set-upstream origin 分支名
 拉取远程仓库：$ git pull [remoteName] [localBranchName]
 推送远程仓库：$ git push [remoteName] [localBranchName]
 git push origin test:master  // 提交本地test分支作为远程的master分支,
