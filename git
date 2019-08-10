@@ -89,7 +89,7 @@ git revert HEAD^ (撤销上上次的提交 next-to-last)
 命令：git branch -vv。
 
 
-git push --set-upstream origin 分支名
+git push --set-upstream origin/(master) 本地分支名
 拉取远程仓库：$ git pull [remoteName] [localBranchName]
 推送远程仓库：$ git push [remoteName] [localBranchName]
 git push origin test:master  // 提交本地test分支作为远程的master分支,
