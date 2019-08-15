@@ -17,6 +17,7 @@ nohup python run.py &不挂断后台运行
 
 远程复制
 scp:
+-i:   identity_file
 scp -r local_folder remote_username@remote_ip:remote_folder #本地到远程
 scp remote_username@remote_ip:remote_folder local_folder #远程到本地 
 
@@ -44,6 +45,16 @@ locate /etc/sh
 which      通常用来确定是否安装指定的软件,因为只从PATH环境变量制定的路径中取搜索命令
 find          实际搜寻硬盘查询文件名称(最强大的,可以通过文件的时间戳,文件的权限)
 usage: find [path] 
+
+shell下命令的执行查找顺序:
+1.以相对/绝对路径执行命令，例如：/bin/ls或者./ls
+2.由alias命令别名来查找命令
+3.由bash内置的（builtin）命令来执行
+4.通过$PATH这个环境变量中查找是否有命令的路径
+type:
+执行 “type -a 命令” 可以查看命令存在于哪里/哪些地方
+查找到之后，命令会根据第一个设置来执行
+type -a python 
 
 显示目录或文件的大小
 du 
