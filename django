@@ -59,6 +59,19 @@ def index(request):
     signals.signalAllen.send(sender=None, allen='test')
     return render(request, template_name='index.html')
 
-
-
 """
+
+django queryset:
+1:字典列表  model.objects.values("field")
+2:元组列表  model.objects.values_list("field")
+3:值列表    model.objects.values_list("field",flat=True)
+
+
+
+
+
+
+
+
+
+
