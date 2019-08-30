@@ -1,4 +1,4 @@
-virtualenv虚拟环境命令:
+virtualenvwrapper虚拟环境命令:
     mkvirtualenv wxhpython01：创建运行环境wxhpython01
     mkvirtualenv --python=/usr/local/python3.5.3/bin/python venv #-p PYTHON_EXE,
     workon wxhpython01: 工作在 zqxt 环境 或 从其它环境切换到 wxhpython01环境
