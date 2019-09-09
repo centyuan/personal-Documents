@@ -67,56 +67,9 @@ django queryset:
 3:值列表    model.objects.values_list("field",flat=True)
 
 
-"""
-
-django restframework不会出现这个情况
-        #允许前端发送json格式数据
-        #Content-Type:application/json
-        from rest_framework.parsers import JSONParser
-	class ParserView(APIView):
-	     parser_classes = [JSONParser,]
-
-django:request.POST or request.body
-1.请求头要求：
-   Content-Type:application/x-www-form-urlencoded
-     ps：如果请求头中的Content-Type: Content-Type:application/x-www-form-urlencoded,有值request.POST才有值
-        （内部去request.body中解析数据）
-2.数据格式要求：
-   name=alex&age=18&gender=男 
-
-如果为Content-Type:application/json
-body有值，post无
-
-a.form表单提交
-  <form method...>
-     input...
-  </form>
-b.ajax提交
-   情况一：
-	$.ajax({
-		url:...
-		type:POST
-		headers:{'Content-Type':'application/json'
-		data:{name:alex,age=18} #内部转化 name=alex&age=18&gender=男
-	})
-   #body有值，post无
-   情况二：
-	$.ajax({
-		url:...
-		type:POST
-		headers:{'Content-Type':'application/json'
-		data:JSON.stringfy({name:alex,age=18}) #
-		})
-    #body有值，post无
-    #json.loads(request.body)
-            
 
 
 
-"""
-
-
-django——通过get_FOO_display 查找模型中的choice值
 
 
 
