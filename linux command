@@ -85,7 +85,13 @@ cut /etc/passwd -d ':' -f 1,6
 #cut 打印每一行的某个字段
 wc /etc/passwd
 #用于统计并输出一个文件中行,单词,字节的数目.简单小巧的计数工具
-sort
+
+sort命令用于将文本文件内容加以排序：
+sort file1 file2 #排序两个文件的内容
+sort file1 file2 | uniq  #取出两个文件的并集（重复的行只保留一份）
+sort file1 file2 | uniq - u  #删除交集，留下其他的行
+sort file1 file2 | uniq -d #取出两个文件的交集（只留下同时存在于这两个文件中的文件
+
 uniq
 grep 
 
