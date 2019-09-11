@@ -1,12 +1,12 @@
-django请求流程:
-#1.wsgi,请求封装后交给web框架 （Flask、Django）     
-#2.中间件，对请求进行校验或在请求对象中添加其他相关数据，例如：csrf、request.session     - 
-#3.路由匹配 根据浏览器发送的不同url去匹配不同的视图函数    
-#4.视图函数，在视图函数中进行业务逻辑的处理，可能涉及到：orm、templates => 渲染     - 
-#5.中间件，对响应的数据进行处理。 
-#6.wsgi,将响应的内容发送给浏览器。
+1:django请求流程:
+	#1.wsgi,请求封装后交给web框架 （Flask、Django）     
+	#2.中间件，对请求进行校验或在请求对象中添加其他相关数据，例如：csrf、request.session     - 
+	#3.路由匹配 根据浏览器发送的不同url去匹配不同的视图函数    
+	#4.视图函数，在视图函数中进行业务逻辑的处理，可能涉及到：orm、templates => 渲染     - 
+	#5.中间件，对响应的数据进行处理。 
+	#6.wsgi,将响应的内容发送给浏览器。
 
-
+2:
 request.POST.get('name','')
 request.POST['name']
 如果使用request.POST['sth']，那么假如‘sth’没有在post内容中就会报错keyError；而使用request.POST.get('sth')时，会返回一个None而不是报错。所以，使用request.POST.get()就相当于：
@@ -18,11 +18,13 @@ request.POST.get()还能添加一个额外的默认参数，如：
     request.POST.get('name','defaultValue')
 如果'name'没在POST[]中,就会return这个defaultValue的值
 
-#django信号机制:其实就是观察者模式，又叫发布-订阅(Publish/Subscribe) 。
+3:django信号机制
+其实就是观察者模式，又叫发布-订阅(Publish/Subscribe) 。
 # 当发生一些动作的时候，发出信号，然后监听了这个信号的函数就会执行。
-"""
-1:注册一个receiver函数
-2:将信号连接到接收器(receiver)上
+
+	过程
+	1:先注册一个receiver函数
+	2:将信号连接到接收器(receiver)上(ps:注意选择sender，还可以手动出发)
  两种方式
  一:回调方式注册
        # receiver
@@ -42,30 +44,41 @@ request.POST.get()还能添加一个额外的默认参数，如：
           print("Request finished!")
 使用的是django.core.signals.request_finished这个信号,在关闭http请求时发送,这些内置的信号的触发者已经集成到了django中,所以其会自动调用,只需要连接接收器函数即可.
 也可以自定义信号:
-1:
-from django.dispatch import Signal, receiver
-#自定义信号,都是django.dispatch.Signal的实例
-signalAllen = Signal(providing_args=['allen']
-2:定义接收器并连接信号(使用装饰器)
-@receiver(signalAllen)
-def signal_callback(sender, **kwargs):
-    print(sender, kwargs)
-    print('signal_callback called')
-3:写触发器函数来发送信号
-from . import signals
-# Create your views here.
+	1:
+	from django.dispatch import Signal, receiver
+	#自定义信号,都是django.dispatch.Signal的实例
+	signalAllen = Signal(providing_args=['allen']
+	2:定义接收器并连接信号(使用装饰器)
+	@receiver(signalAllen)
+	def signal_callback(sender, **kwargs):
+	    print(sender, kwargs)
+	    print('signal_callback called')
+	3:写触发器函数来发送信号
+	from . import signals
+	# Create your views here.
 
-def index(request):
-    signals.signalAllen.send(sender=None, allen='test')
-    return render(request, template_name='index.html')
+	def index(request):
+	    signals.signalAllen.send(sender=None, allen='test')
+	    return render(request, template_name='index.html')
 
-"""
+ 
 
+4.Django ORM
+
+	1.基础查询
+	2.聚合查询（aggregate和annotate） 
+	3.Q查询和F查询
+注意：
+        1.出现filter,exclude order_by这样的查询时候，考虑在需要的Field上加db_index=True
+        2.不需要所有数据一定使用limit，而不是拿到整个数据集在切片
+        3.使用values_list获取需要的数据，而不是每条记录的所有Field
+        4.不要使用len(Queryset),用count代替；不要使用if Queryset,用exists()代替
+        5.复杂的表查询(比如表之间的join),使用raw_sql(sql语句)代替
+ 
 django queryset:
-1:字典列表  model.objects.values("field")
-2:元组列表  model.objects.values_list("field")
-3:值列表    model.objects.values_list("field",flat=True)
-
+	1:字典列表  model.objects.values("field")
+	2:元组列表  model.objects.values_list("field")
+	3:值列表    model.objects.values_list("field",flat=True)
 
 
 
