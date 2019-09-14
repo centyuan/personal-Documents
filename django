@@ -72,13 +72,25 @@ request.POST.get()还能添加一个额外的默认参数，如：
         1.出现filter,exclude order_by这样的查询时候，考虑在需要的Field上加db_index=True
         2.不需要所有数据一定使用limit，而不是拿到整个数据集在切片
         3.使用values_list获取需要的数据，而不是每条记录的所有Field
+          也可以使用 blog.objects.all().only('name')来选择需要的字段
+                    blog.objects.all().defer('content')来排除不需要的字段
         4.不要使用len(Queryset),用count代替；不要使用if Queryset,用exists()代替
-        5.复杂的表查询(比如表之间的join),使用raw_sql(sql语句)代替
- 
+        5.关联查询(要不然遍历外键时候会再次查询数据库)
+          Article.objects.all().select_related('author')
+        6.复杂的表查询(比如表之间的join),使用raw_sql(sql语句)代替
+"""
+如果一个model里没有显示声明哪一个字段（field）是主键（即在某个字段里声明primary_key=True），则django会自动生成一个名为id的AutoFields作为主键。model里的主键都有一个别名叫做pk（primary_key的缩写），无论这个主键是自动生成的还是我们指定的。使用pk和使用主键的名字是一样的效果。
+"""
 django queryset:
 	1:字典列表  model.objects.values("field")
 	2:元组列表  model.objects.values_list("field")
 	3:值列表    model.objects.values_list("field",flat=True)
+        4:指定那些字段更新 instance.save(update_fields=['field1',field2'])
+        5:数组字典  allocation = ArrayField(
+        default=[],
+        base_field=models.DecimalField(
+            max_digits=18, decimal_places=const.DECIMAL_PLACES, help_text='金额')
+    )
 
 
 
