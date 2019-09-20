@@ -70,13 +70,30 @@ git reflog  #用来记录你的每一次命令：便于查看commit_id
 一:修复未提交文件中的错误（重置）
 git reset --hard HEAD^ #可以使工作目录回到上次提交的状态,HEAD表示当前版本
 git reset --hard HEAD^^ #上上一个版本
+
 #恢复一个文件
-git checkout -- readme.txt#把readme.txt从HEAD中checkout 并且把它恢复成未修改时的样子,可以丢弃工作区的修改
-git reset HEAD readme.txt (git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本。)
+#1.把readme.txt从HEAD中checkout 并且把它恢复成未修改时的样子,可以丢弃工作区的修改
+git checkout -- readme.txt
+#2. (git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本。)
+git reset HEAD readme.txt
  两种情况:
 	一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
 
 	一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+#3.让单个文件回滚到指定版本
+
+    git log filename  #查看文件的修改记录 git lot -number filename 
+    git reset e24357bf993516bb960fb4c556a2857e2e47f068 filename #回滚到指定版本
+    git commit -m '回滚filename到xxx版本'   #提交到本地参考
+    git checkout filename   #更新到工作目录
+    git push origin master  #提交到远程仓库
+
+    """
+    1.git reset -mixed：此为默认方式，不带任何参数的git reset，这种方式，它回退到某个版本，只保留源码，回退commit和index信息
+    2.git reset -soft:回退到某个版本，只回退了commit的信息，不会恢复到index file一级。如果还要提交，直接commit即可
+    3.git reset -hard 彻底回退到某个版本，本地的源码也会变成为上一个版本的内容
+
+    """
 
 二: 修复已提交文件中的错误
 1:创建一个 新的提交（commit），在新的提交里撤消老的提交所作的修改。这种作法在你已经把代码发布的情况下十分正确.
