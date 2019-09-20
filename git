@@ -57,6 +57,7 @@ git branch -d experimental
 git reset --hard HEAD^ 
 
 版本回退:
+
 git reset --hard HEAD^ #可以使工作目录回到上次提交的状态,HEAD表示当前版本
 git reset --hard HEAD^^ #上上一个版本,往上100个写成 HEAD~100
 #可以用回到,回退前的新版本
@@ -92,6 +93,8 @@ git revert HEAD^ (撤销上上次的提交 next-to-last)
 git push --set-upstream origin/(master) 本地分支名
 拉取远程仓库：$ git pull [remoteName] [localBranchName]
 推送远程仓库：$ git push [remoteName] [localBranchName]
+
+
 git push origin test:master  // 提交本地test分支作为远程的master分支,
 git push origin test:test     // 提交本地test分支作为远程的test分支
 git push origin master:test   //提交本地的maste分支到远程的test分支,远程会自动创建test分支
