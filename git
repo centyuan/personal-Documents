@@ -96,18 +96,27 @@ git reset HEAD readme.txt
     """
 
 二: 修复已提交文件中的错误
-1:创建一个 新的提交（commit），在新的提交里撤消老的提交所作的修改。这种作法在你已经把代码发布的情况下十分正确.
-git revert HEAD  (HEAD为commit的名字,git log 可以查看)
-git revert HEAD^ (撤销上上次的提交 next-to-last)
+git revert:比如，我们commit了三个版本（版本一、版本二、 版本三），突然发现版本二不行（如：有bug），想要撤销版本二，但又不想影响撤销版本三的提交，就可以用 git revert 命令来反做版本二，生成新的版本四，这个版本四里会保留版本三的东西，但撤销了版本二的东西。ps:如果我们想撤销之前的某一版本，但是又想保留该目标版本后面的版本，记录下这整个版本变动流程，就可以用这种方法:
+    1.查看版本号
+     git log 
+    2.反做 
+     #注意： 这里可能会出现冲突，那么需要手动修改冲突的文件。而且要git add 文件名。
+     git revert -n 4f0b001fd9d2ed9c9f2b445f8e6b8bae6f0ba974 #
+    3.提交
+     git commit -m "revert filename"  
+    4.推送到远程仓库
+     git push
+    
 
-2:去修改你的 老提交（old commit）
+
+
+
 
 1:git checkout -b dev origin/dev #创建并切换本地dev分支后追踪origin的dev(取远程分支并分化一个新分支)
 #本地新建一个分支dev，并切换到新建的分支dev，并且建立dev与远程分支origin/dev的跟踪关系。
 2:git pull origin dev #拉取origin的dev分支到本地分支
 查看本地分支的跟踪分支（上游分支）
-命令：git branch -vv。
-
+命令：git branch -vv
 
 git push --set-upstream origin/(master) 本地分支名
 拉取远程仓库：$ git pull [remoteName] [localBranchName]
