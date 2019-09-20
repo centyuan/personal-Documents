@@ -56,14 +56,16 @@ git branch -d experimental
 #撤销一个合并
 git reset --hard HEAD^ 
 
-版本回退:
 
+
+版本回退:
+git log filename #查看文件的修改记录
+git log -number filename #如果记录太多，
 git reset --hard HEAD^ #可以使工作目录回到上次提交的状态,HEAD表示当前版本
 git reset --hard HEAD^^ #上上一个版本,往上100个写成 HEAD~100
 #可以用回到,回退前的新版本
 git reset --hard commit_id
 git reflog  #用来记录你的每一次命令：便于查看commit_id
-
 
 一:修复未提交文件中的错误（重置）
 git reset --hard HEAD^ #可以使工作目录回到上次提交的状态,HEAD表示当前版本
