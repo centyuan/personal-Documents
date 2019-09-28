@@ -47,6 +47,7 @@ find          实际搜寻硬盘查询文件名称(最强大的,可以通过文�
 usage: find [path] 
 
 shell下命令的执行查找顺序:
+一般情况下，非登录shell不会执行任何profile文件，非交互shell模式不会执行任何bashrc文件。
 1.以相对/绝对路径执行命令，例如：/bin/ls或者./ls
 2.由alias命令别名来查找命令
 3.由bash内置的（builtin）命令来执行
