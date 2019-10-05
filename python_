@@ -151,3 +151,17 @@ on_delete=models.SET,         # 删除关联数据,
 
 
 
+
+面试:
+可变对象和不可变对象
+垃圾回收机制
+
+
+id nickname(客服) create_time account_id enterprise_id(2) type(play) has_dividend(f)
+has_wage(f) agent_disable(0) disable(0) is_mate(0) deb(0) withdrawal_disable(0)  rebatelevel_id(101) virtual(f) lucky_rate(0) version(-1)  sex(0) online_status(0)
+redrebatelevel_id(8) transfer_disable(0) followers({}) real_level_id(101) 
+chessrebatelevel_id(24) videorebatelevel_id(11) 
+agent_betting_disable(0) agent_transfer_disable(1) agent_withdrawal_disable(0) betting_disable(0) mustwin(0)
+
+
+

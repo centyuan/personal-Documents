@@ -1,7 +1,14 @@
+golang:
+    go run hello.go 
+    go build hello.go 
+    ./hello  
+    // Hello, World!
+
 
 1: package main 定义了包名。你必须在源文件中非注释的第一行指明这个文件属于哪个包，如：package main。package main表示一个可独立执行的程序，每个 Go 应用程序都包含一个名为 main 的包。
 
 2: import "fmt" 告诉 Go 编译器这个程序需要使用 fmt 包（的函数，或其他元素），fmt 包实现了格式化 IO（输入/输出）的函数。
+
 
 3:func main() 是程序开始执行的函数。main 函数是每一个可执行程序所必须包含的，一般来说都是在启动后第一个执行的函数（如果有 init() 函数则会先执行该函数）。
 
@@ -9,7 +16,7 @@
 
 5: fmt.Println(...) 可以将字符串输出到控制台，并在最后自动增加换行字符 \n。 
 使用 fmt.Print("hello, world\n") 可以得到相同的结果。 
-Print 和 Println 这两个函数也支持使用变量，如：fmt.Println(arr)。如果没有特别指定，它们会以默认的打印格式将变量 arr 输出到控制台。
+Print(不换行)和 Println(换行) 这两个函数也支持使用变量，如：fmt.Println(arr)。如果没有特别指定，它们会以默认的打印格式将变量 arr 输出到控制台。
 
 6:当标识符（包括常量、变量、类型、函数名、结构字段等等）以一个大写字母开头，如：Group1，那么使用这种形式的标识符的对象就可以被外部包的代码所使用（客户端程序需要先导入这个包），这被称为导出（像面向对象语言中的 public）；标识符如果以小写字母开头，则对包外是不可见的，但是他们在整个包的内部是可见并且可用的（像面向对象语言中的 protected ）
 需要注意的是 { 不能单独放在一行
@@ -29,32 +36,60 @@ Print 和 Println 这两个函数也支持使用变量，如：fmt.Println(arr)�
 (h) Map 类型)
 
 8:声明变量
+全局变量的声明必须用var，局部变量可以省略
+特性变量下划线 "_": var _ = varname //变量丢弃
 var identifier type 
 var identifier1,identifier2 type //一次声明多个变量
 //声明变量没初始化默认为零值(bool型为false,数字型为0,字符串型为""空字符串)
 var b,d=1,2 //根据值类型自行判断
 v_name := value //省略 var, 注意 := 左侧如果没有声明新的变量，就产生编译错误
 var f string :="deserve" 简写 new_f:="deserve"
+分组声明:
+var(
+  i int
+  j float32
+)
 
-多变量声明
+多变量声明:
 //类型相同多个变量, 非全局变量
 var vname1, vname2, vname3 type
 vname1, vname2, vname3 = v1, v2, v3
 var vname1, vname2, vname3 = v1, v2, v3 // 和 python 很像,不需要显示声明类型，自动推断
 vname1, vname2, vname3 := v1, v2, v3 // 出现在 := 左侧的变量不应该是已经被声明过的，否则会导致编译错误
-// 这种因式分解关键字的写法一般用于声明全局变量
-var (
-    vname1 v_type1
-    vname2 v_type2
-)
-9:值类型和引用类型
+变量可见性:
+大写字母开头变量可导出，小写字母开头不可导出，是私有变量(其他包不可使用)
+
+
+
+9:常量
+const identifier [type] = value //type可以省略
+const c_name1, c_name2 = value1, value2 //多个相同类型的声明可以简写:ps常量建议大写
+一般类型声明:
+type varInt int  //其他地方可以使用varInt声明变量
+结构的声明:
+type Student struct {
+}
+接口声明:
+type ilearn interface {
+}
+
+10:值类型和引用类型
 所有像 int、float、bool 和 string 这些基本类型都属于值类型，使用这些类型的变量直接指向存在内存中的值
 可以通过 &i 来获取变量 i 的内存地址
 一个引用类型的变量 r1 存储的是 r1 的值所在的内存地址（数字），或内存地址中第一个字所在的位置:这个内存地址为称之为指针
 
-10:常量
-const identifier [type] = value //type可以省略
-const c_name1, c_name2 = value1, value2 //多个相同类型的声明可以简写
-
-
+11:import
+  import "fmt"
+  import ("package1"
+          "package2")
+  原理：1.如果一个main导入其他包，包将被顺序导入
+       	2.如果导入的包依赖其他的包(包B)，会首先导入包B，然后初始化包B中常量和变量，最后如果包B中有init，会自动执行init()
+        3.所有包导入完成后才会对main中常量和变量进行初始化，然后执行main中init函数(存在),最后执行main函数
+        4.如果一个包被导入多次则只会导入一次
+  还有import 别名 "." "_"等 
+      import (
+            alia_name "package1"  //别名
+            . "package2"         // .操作
+            _ "fmt"             //_下划线 只执行包中init()
+         )
 
