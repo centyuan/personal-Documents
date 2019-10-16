@@ -60,7 +60,6 @@ vname1, vname2, vname3 := v1, v2, v3 // 出现在 := 左侧的变量不应该是
 大写字母开头变量可导出，小写字母开头不可导出，是私有变量(其他包不可使用)
 
 
-
 9:常量
 const identifier [type] = value //type可以省略
 const c_name1, c_name2 = value1, value2 //多个相同类型的声明可以简写:ps常量建议大写
@@ -72,6 +71,10 @@ type Student struct {
 接口声明:
 type ilearn interface {
 }
+声明数组:
+Go 语言数组声明需要指定元素类型及元素个数，语法格式如下：
+var variable_name [SIZE] variable_type
+var balance = [5]float32{1000.0, 2.0, 3.4, 7.0, 50.0}
 
 10:值类型和引用类型
 所有像 int、float、bool 和 string 这些基本类型都属于值类型，使用这些类型的变量直接指向存在内存中的值

@@ -68,7 +68,7 @@ zip -r -q -o centyuan.zip /home/centyuan
 -q:表示为安全模式,即不向屏幕输出信息
 -o:表示输出文件,需在其后紧跟打包输出文件名
 打包
-tar -cf centyuan.tar /home/centyuan/Desktop
+tar 	-cf centyuan.tar /home/centyuan/Desktop
 -c:表示创建一个tar包文件
 -f:用于制定文件名
 -v:可视的输出打包文件
@@ -130,6 +130,8 @@ ln -s 源文文件或目录 目标文件或目录
 用df -i查看了一下/data分区的索引节点(inode)，发现已经用满(IUsed=100%)，导致系统无法创建新目录和文件
  
 
+sudo su root
+su root
 
 
 
