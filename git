@@ -70,10 +70,13 @@ git reflog  #用来记录你的每一次命令：便于查看commit_id
 
 
 一:修复未提交文件中的错误（重置）
+git reset --hard 版本号 // 返回到某个版本，放弃所有修改
 git reset --hard HEAD^ #可以使工作目录回到上次提交的状态,HEAD表示当前版本
 git reset --hard HEAD^^ #上上一个版本
+
 #恢复一个文件
-git checkout -- readme.txt#把readme.txt从HEAD中checkout 并且把它恢复成未修改时的样子,可以丢弃工作区的修改
+git checkout  readme.txt# 放弃本地readme.txt文件的修改
+git checkout // 放弃所有文件的所有修改
 git reset HEAD readme.txt (git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本。)
  两种情况:
 	一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
