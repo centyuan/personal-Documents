@@ -81,7 +81,7 @@ gi可以快速跳转到最后一次编辑的地方进入插入模式
 ctrl+w+w 或者ctrl+w+(hjkl)
 
 设置行号
-:set nu	
+:set number
 
 vim -x name.txt #创建加密文件
 
