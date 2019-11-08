@@ -128,12 +128,25 @@ ln -s命令可以创建软链接。
 ln -s 源文文件或目录 目标文件或目录
 用df -h命令查看了一下磁盘使用情况
 用df -i查看了一下/data分区的索引节点(inode)，发现已经用满(IUsed=100%)，导致系统无法创建新目录和文件
- 
 
 sudo su root
 su root
+rpm:
+#查询是否安装某个软件
+rpm -qa | grep vim
+
+#查询命令属于哪个软件
+rpm -qf  /usr/bin/passwd
+
+#查询文件
+rpm -qf /usr/bin
+
+#查询RPM的详细信息
+rpm -qpi /mnt/Packages/filesystem-3.2-20.el7.x86_64.rpm 
 
 
+rz:上传文件
+sz:下载文件
 
 
 

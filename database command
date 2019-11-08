@@ -11,6 +11,8 @@ sudo su postgres
 postgresql:
 登录:
  psql -U dbuser -d exampledb -h 127.0.0.1 -p 5432
+/usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data/  初始化数据库
+/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start
 
 配置数据库允许远程连接访问:
 1修改监听地址

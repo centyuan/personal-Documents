@@ -17,9 +17,22 @@
 
 2：登录github。打开setting->SSH keys，点击右上角 New SSH key，把生成好的公钥id_rsa.pub放进 key输入框中，再为当前的key起一个title来区分每个key。
 3：测试：
-ssh git@github.com  连接成功！
-ssh -T git@gitee.com
-生成gitlab的sshkey，并且重命名为id_rsa_gitlab
+  ssh git@github.com  连接成功！
+  ssh -T git@gitee.com
+ 生成gitlab的sshkey，并且重命名为id_rsa_gitlab
+4:配置多个key(.ssh目录下：创建config文件)
+添加如下内容：
+host github.com
+     HostName github.com
+     User centyuan@outlook.com
+     IdentityFile ~/.ssh/id_rsa_github
+host gitee.com
+     HostName gitee.com
+     User centyuan@outlook.com
+     IdentityFile ~/.ssh/id_rsa_gitee
+5:如果不对用户相关配置修改，会默认以 --global配置的用户信息进行提交，所以需要进入指定文件夹，进行配置，覆盖全局的相关配置信息。
+  git config user.name "centyuan"  #git config --global user.name "centyuan"
+  git config user.email "centyuan@outlook.com" #git config --global user.email "centyuan@outlook.com"
 
 $ ssh-keygen -t rsa -C "your_email@email.com" -f ~/.ssh/id_rsa_gitlab
  ssh -i /home/centyuan/.ssh/id_rsa_UbuntuServer root@120.79.12.2#秘钥登录
@@ -68,10 +81,14 @@ git reset --hard commit_id
 git reflog  #用来记录你的每一次命令：便于查看commit_id
 
 一:修复未提交文件中的错误（重置）
+git reset --hard 版本号 // 返回到某个版本，放弃所有修改
 git reset --hard HEAD^ #可以使工作目录回到上次提交的状态,HEAD表示当前版本
 git reset --hard HEAD^^ #上上一个版本
 
 #恢复一个文件
+git checkout  readme.txt# 放弃本地readme.txt文件的修改
+git checkout // 放弃所有文件的所有修改
+
 #1.把readme.txt从HEAD中checkout 并且把它恢复成未修改时的样子,可以丢弃工作区的修改
 git checkout -- readme.txt
 #2. (git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本。)
