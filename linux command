@@ -127,6 +127,6 @@ rpm -qf /usr/bin
 rpm -qpi /mnt/Packages/filesystem-3.2-20.el7.x86_64.rpm 
 
 
-
-
+rz:上传文件
+sz:下载文件
 
