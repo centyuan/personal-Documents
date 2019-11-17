@@ -1,0 +1,13 @@
+nginx功能介绍:
+http服务，反向代理，负载均衡，邮件代理，缓存加速，ssl，flv/mp4流媒体
+nginx 配置文件
+配置文件结构
+1:全局配置(user, work_processes, error_log, pid)
+2:events(网络连接相关，worker_connections)
+3:http(最重要的部分，大部分功能在这）
+4:server (虚拟主机相关)
+5:location (server 里面)
+https://coding.net/u/aminglinux/p/nginx/git/tree/master/3z 
+ nginx.conf:
+ user nginx # 以哪个用户启动nginx worker进程
+ worker_processes auto # worker_processes 2 # 启动几个进程 
